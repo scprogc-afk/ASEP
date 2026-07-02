@@ -14,22 +14,14 @@
     <div id="app" class="w-full max-w-[550px] bg-white/95 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden min-h-[600px] flex flex-col">
         <div class="bg-[#1a365d] p-6 text-white text-center font-extrabold text-xl shadow-md">ΑΣΕΠ QUIZ</div>
 
-        <!-- Screens Container -->
         <div class="flex-1 p-6">
-
-            <!-- Menu Screen -->
             <div id="menu-screen" class="space-y-3">
                 <h2 class="text-lg font-bold text-slate-800 mb-4">Επιλογή Ενότητας</h2>
                 <div id="menu-list" class="space-y-2"></div>
             </div>
 
-            <!-- Mode Screen (Hidden by default) -->
             <div id="mode-screen" class="hidden space-y-4"></div>
-
-            <!-- Quiz Screen (Hidden by default) -->
             <div id="quiz-screen" class="hidden"></div>
-
-            <!-- Results Screen (Hidden by default) -->
             <div id="results-screen" class="hidden text-center p-6"></div>
         </div>
     </div>
@@ -39,19 +31,19 @@
             "Συνταγματικό Δίκαιο": "syn.json",
             "Διοικητικό Δίκαιο": "didik.json",
             "Ευρωπαϊκοί Θεσμοί και Δίκαιο": "euro.json",
-            "Οικονομικές Επιστήμες": "economy.json",
-            "Πληροφορική και Ψηφιακή Διακυβέρνηση": "it.json",
-            "Σύγχρονη Ιστορία της Ελλάδας (1864 - σήμερα)": "history.json",
-            "Κώδικας Κατάστασης Πολιτικών Διοικητικών Υπαλλήλων": "codes.json",
-            "Γενικός Κανονισμός για την Προστασία Δεδομένων (GDPR)": "gdpr.json",
-            "Διοίκηση Επιχειρήσεων και Οργανισμών": "admin.json",
-            "Διοίκηση Ανθρώπινου Δυναμικού": "10_Διοίκηση Ανθρώπινου Δυναμικού.json",
-            "Κώδικας Συμπεριφοράς Δημοσίων Υπαλλήλων": "11_Κώδικας Συμπεριφοράς Δημοσίων Υπαλλήλων.json"
+            "Οικονομικές Επιστήμες": "4_Οικονομικές Επιστήμες.json",
+            "Πληροφορική και Ψηφιακή Διακυβέρνηση": "5_Πληροφορική και Ψηφιακή Διακυβέρνηση.json",
+            "Σύγχρονη Ιστορία της Ελλάδας (1864 - σήμερα)": "6_Σύγχρονη Ιστορία της Ελλάδας.json"
+        };
+
+        const CONFIG = {
+            username: "scprogc-afk",
+            repo: "EU_History_DEMO",
+            branch: "main"
         };
 
         let state = { questions: [], currentIdx: 0, score: 0, selectedCat: "" };
 
-        // Αρχικοποίηση μενού
         document.addEventListener('DOMContentLoaded', () => {
             const menuList = document.getElementById('menu-list');
             menuList.innerHTML = Object.keys(CATEGORY_FILES).map(cat => `
@@ -81,15 +73,21 @@
         }
 
         async function startQuiz(mode) {
-            const path = 'static/' + CATEGORY_FILES[state.selectedCat];
+            const fileName = CATEGORY_FILES[state.selectedCat];
+            const url = `https://raw.githubusercontent.com/${CONFIG.username}/${CONFIG.repo}/${CONFIG.branch}/static/${fileName}`;
+
             try {
-                const res = await fetch(path);
+                const res = await fetch(url);
+                if (!res.ok) throw new Error("Αποτυχία φόρτωσης");
                 let data = await res.json();
+                
                 state.questions = (mode === 'random') ? data.sort(() => 0.5 - Math.random()).slice(0, 20) : data;
                 state.currentIdx = 0;
                 state.score = 0;
                 renderQuestion();
-            } catch(e) { alert("Σφάλμα: Βεβαιώσου ότι ο Flask server τρέχει και το αρχείο υπάρχει στο /static/"); }
+            } catch(e) { 
+                alert("Σφάλμα: Δεν βρέθηκε το αρχείο στο GitHub. Έλεγξε το όνομα του repo και του φακέλου static."); 
+            }
         }
 
         function renderQuestion() {
@@ -118,7 +116,7 @@
             const fb = document.getElementById('feedback');
             const isCorrect = (k === q.correct_answer);
             if(isCorrect) state.score++;
-
+            
             fb.innerText = isCorrect ? "ΣΩΣΤΑ! ✅" : `ΛΑΘΟΣ! Σωστή: ${q.correct_answer.toUpperCase()}`;
             fb.className = `mt-6 p-4 rounded-xl text-center font-bold ${isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`;
             fb.classList.remove('hidden');
