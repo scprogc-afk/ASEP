@@ -21,13 +21,18 @@
         <div id="menu-screen" class="flex-1 p-6">
             <h2 class="text-xl font-extrabold text-[#1a365d] mb-4">Επιλογή Ενότητας</h2>
             <div id="category-list" class="space-y-3">
-                <button onclick="chooseCategory('Συνταγματικό Δίκαιο')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">
-                    Συνταγματικό Δίκαιο
-                </button>
-                <button onclick="chooseCategory('Διοικητικό Δίκαιο')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">
-                    Διοικητικό Δίκαιο
-                </button>
-                </div>
+    <button onclick="chooseCategory('Συνταγματικό Δίκαιο')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Συνταγματικό Δίκαιο</button>
+    <button onclick="chooseCategory('Διοικητικό Δίκαιο')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Διοικητικό Δίκαιο</button>
+    <button onclick="chooseCategory('Ευρωπαϊκοί Θεσμοί και Δίκαιο')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Ευρωπαϊκοί Θεσμοί και Δίκαιο</button>
+    <button onclick="chooseCategory('Οικονομικές Επιστήμες')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Οικονομικές Επιστήμες</button>
+    <button onclick="chooseCategory('Πληροφορική και Ψηφιακή Διακυβέρνηση')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Πληροφορική και Ψηφιακή Διακυβέρνηση</button>
+    <button onclick="chooseCategory('Σύγχρονη Ιστορία της Ελλάδας (1864 - σήμερα)')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Σύγχρονη Ιστορία της Ελλάδας</button>
+    <button onclick="chooseCategory('Κώδικας Κατάστασης Πολιτικών Διοικητικών Υπαλλήλων και Υπαλλήλων Ν.Π.Δ.Δ.')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Κώδικας Κατάστασης Υπαλλήλων</button>
+    <button onclick="chooseCategory('Γενικός Κανονισμός για την Προστασία Δεδομένων (GDPR)')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Γενικός Κανονισμός (GDPR)</button>
+    <button onclick="chooseCategory('Διοίκηση Επιχειρήσεων και Οργανισμών')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Διοίκηση Επιχειρήσεων και Οργανισμών</button>
+    <button onclick="chooseCategory('Διοίκηση Ανθρώπινου Δυναμικού')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Διοίκηση Ανθρώπινου Δυναμικού</button>
+    <button onclick="chooseCategory('Κώδικας Συμπεριφοράς Δημοσίων Υπαλλήλων')" class="w-full text-left bg-white border p-4 rounded-2xl shadow-sm hover:border-blue-500 transition-all">Κώδικας Συμπεριφοράς Δημοσίων Υπαλλήλων</button>
+</div>
         </div>
 
         <div id="options-screen" class="hidden flex-1 p-6">...</div>
@@ -38,9 +43,9 @@
     <script>
         // Χάρτης αντιστοίχισης ενότητας με αρχείο JSON
         const CATEGORY_FILES = {
-            "Συνταγματικό Δίκαιο": "1_Συνταγματικό Δίκαιο.json",
-            "Διοικητικό Δίκαιο": "2_Διοικητικό Δίκαιο.json",
-            "Ευρωπαϊκοί Θεσμοί και Δίκαιο": "3_Ευρωπαϊκοί Θεσμοί και Δίκαιο.json",
+            "Συνταγματικό Δίκαιο": "syn.json",
+            "Διοικητικό Δίκαιο": "didik.json",
+            "Ευρωπαϊκοί Θεσμοί και Δίκαιο": "euro.json",
             "Οικονομικές Επιστήμες": "4_Οικονομικές Επιστήμες.json",
             "Πληροφορική και Ψηφιακή Διακυβέρνηση": "5_Πληροφορική και Ψηφιακή Διακυβέρνηση.json",
             "Σύγχρονη Ιστορία της Ελλάδας (1864 - σήμερα)": "6_Σύγχρονη Ιστορία της Ελλάδας.json",
