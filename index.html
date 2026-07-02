@@ -81,7 +81,7 @@
         }
 
         async function startQuiz(mode) {
-            const path = '/static/' + CATEGORY_FILES[state.selectedCat];
+            const path = 'static/' + CATEGORY_FILES[state.selectedCat];
             try {
                 const res = await fetch(path);
                 let data = await res.json();
